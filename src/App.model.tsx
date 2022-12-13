@@ -9,6 +9,6 @@ export enum STAGE {
 
 export interface IAppState {
     stage: STAGE;
-
+    name: string;
 }
 

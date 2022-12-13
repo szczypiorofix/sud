@@ -13,7 +13,7 @@ export const MainMenu: React.FC<IMainMenuProps>  = ( props: IMainMenuProps ) => 
 
     const mainAppContext = useContext<IMainAppContext>( MainAppContext );
 
-    console.log("MainAppContext: " + mainAppContext.stage);
+    console.log("MainAppContext: nane:  " + mainAppContext.name);
 
     const [state, setState] = useState<IMainMenuState>({
        menu: [

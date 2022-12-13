@@ -4,8 +4,10 @@ import {STAGE} from "../App.model";
 
 export interface IMainAppContext {
     stage: STAGE;
+    name: string;
 }
 
 export const MainAppContext = React.createContext<IMainAppContext>({
-    stage: STAGE.SPLASH
+    stage: STAGE.SPLASH,
+    name: ''
 });

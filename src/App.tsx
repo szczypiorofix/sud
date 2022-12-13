@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {IAppState, STAGE} from "./App.model";
 import {SplashScreen} from "./stages/splashscreen/SplashScreen";
 import {MainMenu} from "./stages/mainmenu/MainMenu";
@@ -11,7 +11,8 @@ export const App: React.FC = () => {
 
 
     const [ state, setState ] = useState<IAppState>({
-        stage: STAGE.SPLASH
+        stage: STAGE.SPLASH,
+        name: "splash"
     });
 
 
@@ -27,13 +28,22 @@ export const App: React.FC = () => {
         }
     }
 
+    useEffect( () => {
+        if ( state.stage === STAGE.MAIN_MENU ) {
+            setTimeout( () => {
+               setState({
+                   ...state,
+                   name: "MainMenu"
+               })
+            }, 2000 );
+        }
+    }, [ state.stage ] );
+
     console.log('[render]: App');
 
     return <div className='background-container'>
         <MainAppContext.Provider
-            value={ {
-                stage: STAGE.SPLASH
-            } }
+            value={ state }
         >
             { stageResolver() }
         </MainAppContext.Provider>
