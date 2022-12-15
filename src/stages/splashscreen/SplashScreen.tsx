@@ -8,10 +8,10 @@ import {STAGE} from "../../App.model";
 
 export const SplashScreen: React.FC  = () => {
 
-    const { stage, setState } = useGlobalContext();
+    const { stage, setStage } = useGlobalContext();
 
     const switchToMainMenuTimeOut = () => {
-        setState( STAGE.MAIN_MENU  );
+        setStage( STAGE.MAIN_MENU  );
     }
 
     useEffect(() => {

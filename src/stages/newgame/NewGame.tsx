@@ -6,5 +6,6 @@ export const NewGame: React.FC  = () => {
 
 
 
+
     return <div>NEW GAME...</div>
 }

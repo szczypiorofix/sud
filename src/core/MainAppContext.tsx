@@ -10,7 +10,7 @@ export interface IMainAppContext {
 
 export type GlobalContent = {
     stage: STAGE;
-    setState:( stage: STAGE ) => void
+    setStage:( stage: STAGE ) => void
 }
 
 
@@ -18,7 +18,7 @@ export type GlobalContent = {
 const MainAppContext = React.createContext<GlobalContent>(
     {
         stage: STAGE.SPLASH,
-        setState: () => {}
+        setStage: () => {}
     }
 );
 

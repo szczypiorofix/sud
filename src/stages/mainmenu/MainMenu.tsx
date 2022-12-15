@@ -1,19 +1,19 @@
-import React, {useContext, useEffect, useState} from "react";
-
-import './MainMenu.scss';
+import React, {useState} from "react";
 import {MenuList} from "./MenuList";
 import {IMainMenuProps, IMainMenuState} from "./MainMenu.Model";
-import { IKeyProps} from "../../core/Inputs.Model";
+import {IKeyProps} from "../../core/Inputs.Model";
 import {Inputs} from "../../core/Inputs";
+import {useGlobalContext} from "../../core/MainAppContext";
 
-
+import './MainMenu.scss';
+import {STAGE} from "../../App.model";
 
 
 export const MainMenu: React.FC<IMainMenuProps>  = ( props: IMainMenuProps ) => {
 
+    const { stage, setStage } = useGlobalContext();
 
-
-    const [state, setState] = useState<IMainMenuState>({
+    const [ state, setState] = useState<IMainMenuState>({
        menu: [
            {
                title: "NOWA GRA",
@@ -28,7 +28,6 @@ export const MainMenu: React.FC<IMainMenuProps>  = ( props: IMainMenuProps ) => 
                selected: false
            }
        ],
-        // keys: DEFAULT_KEYS
     });
 
     const onKeyPressed = ( keyProps: IKeyProps ) => {
@@ -51,7 +50,7 @@ export const MainMenu: React.FC<IMainMenuProps>  = ( props: IMainMenuProps ) => 
         switch ( keyProps.code ) {
             case 'KeyN':
                 console.log('Nowa gra...');
-
+                setStage( STAGE.NEW_GAME );
                 break;
             default:
                 break;
