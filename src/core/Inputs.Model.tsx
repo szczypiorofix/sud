@@ -14,6 +14,8 @@ export const KEYS = [
     'KeyS',
     'KeyD',
     'KeyQ',
+    'KeyO',
+    'KeyN',
     'Space',
 ];
 

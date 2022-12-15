@@ -4,7 +4,7 @@ import {SplashScreen} from "./stages/splashscreen/SplashScreen";
 import {MainMenu} from "./stages/mainmenu/MainMenu";
 
 import './App.scss';
-import {MainAppContext} from "./core/MainAppContext";
+import MainAppContext from "./core/MainAppContext";
 
 
 export const App: React.FC = () => {
@@ -19,31 +19,27 @@ export const App: React.FC = () => {
     const stageResolver = () => {
         switch( state.stage ) {
             case STAGE.MAIN_MENU:
-                return <MainMenu
-                />
+                return <MainMenu />
             default:
-                return <SplashScreen
-                    switchToMainMenu={ () => setState({...state, stage: STAGE.MAIN_MENU }) }
-                />
+                return <SplashScreen />
         }
     }
 
-    useEffect( () => {
-        if ( state.stage === STAGE.MAIN_MENU ) {
-            setTimeout( () => {
-               setState({
-                   ...state,
-                   name: "MainMenu"
-               })
-            }, 2000 );
-        }
-    }, [ state.stage ] );
 
     console.log('[render]: App');
 
+
     return <div className='background-container'>
         <MainAppContext.Provider
-            value={ state }
+            value={ {
+                stage: state.stage,
+                setState: (stage: STAGE) => {
+                    setState({
+                        ...state,
+                        stage
+                    });
+                }
+            } }
         >
             { stageResolver() }
         </MainAppContext.Provider>

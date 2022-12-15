@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IInputsProps } from "./Inputs.Model";
+import {IInputsProps, KEYS} from "./Inputs.Model";
 
 
 
@@ -25,12 +25,14 @@ export const Inputs: React.FC<IInputsProps> = ( props: IInputsProps ) => {
     }
 
     const keypressed = ( e: KeyboardEvent ) => {
-        props.onKeyPressed({
-            code: e.code,
-            down: false,
-            pressed: true,
-            up: false
-        });
+        if ( KEYS.indexOf( e.code) > -1 ) {
+            props.onKeyPressed({
+                code: e.code,
+                down: false,
+                pressed: true,
+                up: false
+            });
+        }
     }
 
 

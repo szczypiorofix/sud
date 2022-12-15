@@ -1,57 +1,67 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import './MainMenu.scss';
 import {MenuList} from "./MenuList";
 import {IMainMenuProps, IMainMenuState} from "./MainMenu.Model";
-import {DEFAULT_KEYS, IKeyProps} from "../../core/Inputs.Model";
+import { IKeyProps} from "../../core/Inputs.Model";
 import {Inputs} from "../../core/Inputs";
-import {IMainAppContext, MainAppContext} from "../../core/MainAppContext";
+
 
 
 
 export const MainMenu: React.FC<IMainMenuProps>  = ( props: IMainMenuProps ) => {
 
-    const mainAppContext = useContext<IMainAppContext>( MainAppContext );
 
-    console.log("MainAppContext: nane:  " + mainAppContext.name);
 
     const [state, setState] = useState<IMainMenuState>({
        menu: [
            {
-               title: "NEW GAME",
+               title: "NOWA GRA",
                selected: true
            },
            {
-               title: 'OPTIONS',
+               title: 'OPCJE',
                selected: false
            },
            {
-               title: "QUIT",
+               title: "WYJDŹ",
                selected: false
            }
        ],
-        keys: DEFAULT_KEYS
+        // keys: DEFAULT_KEYS
     });
 
     const onKeyPressed = ( keyProps: IKeyProps ) => {
-        console.log("Key pressed: " + keyProps.code );
-        if ( state.keys[ keyProps.code ] ) {
-            setState({
-                ...state,
-                keys: {
-                    ...state.keys,
-                    [keyProps.code]: {
-                        pressed: true,
-                        up: false,
-                        down: false,
-                        code: keyProps.code
-                    }
-                }
-            })
+        // console.log("Key pressed: " + keyProps.code );
+        // if ( state.keys[ keyProps.code ] ) {
+        //     setState({
+        //         ...state,
+        //         keys: {
+        //             ...state.keys,
+        //             [keyProps.code]: {
+        //                 pressed: true,
+        //                 up: false,
+        //                 down: false,
+        //                 code: keyProps.code
+        //             }
+        //         }
+        //     })
+        // }
+
+        switch ( keyProps.code ) {
+            case 'KeyN':
+                console.log('Nowa gra...');
+
+                break;
+            default:
+                break;
         }
+
     }
 
+
     console.log('[render]: MainMenu');
+
 
     return <div className="main-menu-container">
         <div className="title">

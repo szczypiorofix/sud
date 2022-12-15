@@ -12,7 +12,7 @@ export interface IMainMenuItem {
 
 export interface IMainMenuState {
     menu: IMainMenuItem[];
-    keys: IKeyPropsList;
+    // keys: IKeyPropsList;
 }
 
 
