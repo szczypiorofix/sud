@@ -58,9 +58,7 @@ export const MainMenu: React.FC<IMainMenuProps>  = ( props: IMainMenuProps ) => 
 
     }
 
-
-    console.log('[render]: MainMenu');
-
+    // console.log('[render]: MainMenu');
 
     return <div className="main-menu-container">
         <div className="title">

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 
-import './SplashScreen.scss';
 import {APP_VERSION} from "../../shared/AppSettings";
 import {useGlobalContext} from "../../core/MainAppContext";
 import {STAGE} from "../../App.model";
+
+import './SplashScreen.scss';
 
 
 export const SplashScreen: React.FC  = () => {
@@ -18,9 +19,7 @@ export const SplashScreen: React.FC  = () => {
         setTimeout(  switchToMainMenuTimeOut, 1000 );
     }, [] );
 
-
-    console.log('[render]: SplashScreen');
-
+    // console.log('[render]: SplashScreen');
 
     return <div className="splash-screen-container">
         <div className="title">

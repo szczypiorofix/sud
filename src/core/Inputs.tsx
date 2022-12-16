@@ -48,7 +48,7 @@ export const Inputs: React.FC<IInputsProps> = ( props: IInputsProps ) => {
         window.removeEventListener( 'keypress', keypressed );
     }
 
-    console.log('[render]: Inputs');
+    // console.log('[render]: Inputs');
 
     useEffect( () => {
         setListeners();

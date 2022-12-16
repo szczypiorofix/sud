@@ -13,6 +13,7 @@ export type GlobalContent = {
     setStage:( stage: STAGE ) => void
 }
 
+export const DEFAULT_STAGE = STAGE.SPLASH;
 
 
 const MainAppContext = React.createContext<GlobalContent>(
