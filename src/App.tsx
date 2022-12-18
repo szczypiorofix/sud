@@ -1,9 +1,9 @@
 import React, {useReducer} from 'react';
 import {STAGE} from "./App.model";
-import MainAppContext, {DEFAULT_STAGE} from "./core/MainAppContext";
+import MainAppContext, {IMainAppState} from "./core/MainAppContext";
 import {SplashScreen} from "./stages/splashscreen/SplashScreen";
 import {MainMenu} from "./stages/mainmenu/MainMenu";
-import {AppStageReducer, REDUCER_ACTION_TYPE} from "./core/AppStageReducer";
+import {APP_SETTINGS_REDUCER_ACTION_TYPE, AppSettingsReducer} from "./core/AppStageReducer";
 
 import './App.scss';
 import {NewGame} from "./stages/newgame/NewGame";
@@ -11,7 +11,7 @@ import {NewGame} from "./stages/newgame/NewGame";
 
 export const App: React.FC = () => {
 
-    const [ state, dispatch ] = useReducer( AppStageReducer, { stage: STAGE.SPLASH } );
+    const [ state, dispatch ] = useReducer( AppSettingsReducer, { stage: STAGE.SPLASH, playerName: 'Todd Howard' } );
 
     const stageResolver = () => {
         switch ( state.stage ) {
@@ -24,22 +24,24 @@ export const App: React.FC = () => {
         }
     }
 
-    // console.log('[render]: App');
+    console.log('[render]: App');
 
     return <div className='background-container'>
         <MainAppContext.Provider
             value={ {
-                stage: DEFAULT_STAGE,
-                setStage: ( stage ) => {
-                    dispatch( {
-                        type: REDUCER_ACTION_TYPE.MOVE_TO_OTHER_STAGE,
-                        payload: stage
-                    } );
+                appState: state,
+                setAppState: ( _state: IMainAppState, _type: APP_SETTINGS_REDUCER_ACTION_TYPE ) => {
+                    dispatch({
+                        type: _type,
+                        payload: {
+                            stage: _state.stage,
+                            playerName: _state.playerName
+                        }
+                    });
                 }
             } }
         >
             { stageResolver() }
         </MainAppContext.Provider>
     </div>
-
 }

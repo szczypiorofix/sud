@@ -1,25 +1,28 @@
 import React, {useContext} from "react";
 import {STAGE} from "../App.model";
+import {APP_SETTINGS_REDUCER_ACTION_TYPE} from "./AppStageReducer";
 
 
-export interface IMainAppContext {
+export interface IMainAppState {
     stage: STAGE;
-    name: string;
-    setMainAppContext: () => void;
+    playerName: string;
 }
 
 export type GlobalContent = {
-    stage: STAGE;
-    setStage:( stage: STAGE ) => void
+    appState: IMainAppState;
+    setAppState:( state: IMainAppState, type: APP_SETTINGS_REDUCER_ACTION_TYPE ) => void
 }
 
-export const DEFAULT_STAGE = STAGE.SPLASH;
+export const DEFAULT_APP_STATE: IMainAppState = {
+    stage: STAGE.SPLASH,
+    playerName: "Todd Howard"
+};
 
 
 const MainAppContext = React.createContext<GlobalContent>(
     {
-        stage: STAGE.SPLASH,
-        setStage: () => {}
+        appState: DEFAULT_APP_STATE,
+        setAppState: () => {}
     }
 );
 

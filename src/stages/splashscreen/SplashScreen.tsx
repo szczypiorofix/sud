@@ -1,25 +1,29 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import {APP_VERSION} from "../../shared/AppSettings";
 import {useGlobalContext} from "../../core/MainAppContext";
 import {STAGE} from "../../App.model";
 
 import './SplashScreen.scss';
+import {APP_SETTINGS_REDUCER_ACTION_TYPE} from "../../core/AppStageReducer";
 
 
 export const SplashScreen: React.FC  = () => {
 
-    const { stage, setStage } = useGlobalContext();
+    const { appState, setAppState } = useGlobalContext();
 
     const switchToMainMenuTimeOut = () => {
-        setStage( STAGE.MAIN_MENU  );
+        setAppState( {
+            ...appState,
+            stage: STAGE.MAIN_MENU
+        }, APP_SETTINGS_REDUCER_ACTION_TYPE.MOVE_TO_STAGE );
     }
 
     useEffect(() => {
         setTimeout(  switchToMainMenuTimeOut, 1000 );
     }, [] );
 
-    // console.log('[render]: SplashScreen');
+    console.log('[render]: SplashScreen');
 
     return <div className="splash-screen-container">
         <div className="title">

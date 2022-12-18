@@ -3,12 +3,5 @@
 export enum STAGE {
     SPLASH,
     MAIN_MENU,
-    NEW_GAME,
-    GAME
+    NEW_GAME
 }
-
-export interface IAppState {
-    stage: STAGE;
-    name: string;
-}
-

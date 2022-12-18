@@ -34,7 +34,7 @@ export interface IKeyPropsList {
 
 let defaultKeys: IKeyPropsList = {};
 
-KEYS.map( ( item, index ) => {
+KEYS.map( ( item ) => {
     defaultKeys[ item ] = {
         code: item,
         down: false,
@@ -43,4 +43,4 @@ KEYS.map( ( item, index ) => {
     };
 });
 
-export const DEFAULT_KEYS = defaultKeys;
+// export const DEFAULT_KEYS = defaultKeys;
