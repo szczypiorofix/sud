@@ -1,61 +1,69 @@
-import React  from "react";
+import React, {useRef, useState} from "react";
 import {MenuList} from "./MenuList";
-import {IMainMenuItem} from "./MainMenu.Model";
-import {IKeyProps} from "../../core/Inputs.Model";
+import {IMainMenuItem, IMainMenuState} from "./MainMenu.Model";
 import {Inputs} from "../../core/Inputs";
-import {useGlobalContext} from "../../core/MainAppContext";
 
 import './MainMenu.scss';
-import {STAGE} from "../../App.model";
-import {APP_SETTINGS_REDUCER_ACTION_TYPE} from "../../core/AppStageReducer";
+import {IKeyProps, KEY} from "../../core/Inputs.Model";
 
 
 export const MainMenu: React.FC  = () => {
 
-    const { appState, setAppState } = useGlobalContext();
 
-    const menu: IMainMenuItem[] =
-    [
-        {
-        title: "NOWA GRA",
-        selected: true
-        },
-        {
-            title: 'OPCJE',
-            selected: false
-        },
-        {
-            title: "WYJDŹ",
-            selected: false
-        }
-    ];
+    const defaultMenu: IMainMenuItem[] =
+        [
+            {
+                title: "NOWA GRA"
+            },
+            {
+                title: 'OPCJE'
+            },
+            {
+                title: 'POMOC'
+            },
+            {
+                title: 'NAJLEPSZE WYNIKI'
+            },
+            {
+                title: "WYJDŹ"
+            }
+        ];
 
-    const onKeyPressed = ( keyProps: IKeyProps ) => {
-        switch ( keyProps.code ) {
-            case 'KeyN':
-                setAppState(
-                    {
-                        ...appState,
-                        stage: STAGE.NEW_GAME
-                    },
-                    APP_SETTINGS_REDUCER_ACTION_TYPE.MOVE_TO_STAGE
-                );
-                break;
-            case 'Space':
-                setAppState(
-                    {
-                        ...appState,
-                        playerName: "Emil Pierdololo"
-                    },
-                    APP_SETTINGS_REDUCER_ACTION_TYPE.CHANGE_PLAYER_NAME
-                );
-                break;
-            default:
-                break;
+    const [ state, setState ] = useState<IMainMenuState>({
+        selectedMenuPosition: 0,
+        list: defaultMenu
+    });
+
+    const stateRef = useRef<IMainMenuState>();
+    stateRef.current = state;
+
+    // const { appState, setAppState } = useGlobalContext();
+
+    const onKeyDown = ( key: KEY ) => {
+        const curState = stateRef.current;
+        if ( curState ) {
+            switch( key ) {
+                case KEY.KEY_DOWN:
+                    const posDown = curState.selectedMenuPosition < curState.list.length - 1 ? curState.selectedMenuPosition + 1 : curState.selectedMenuPosition = 0;
+                    setState({
+                        ...curState,
+                        selectedMenuPosition: posDown
+                    });
+                    break;
+                case KEY.KEY_UP:
+                    const posUp = curState.selectedMenuPosition > 0 ? curState.selectedMenuPosition - 1 : curState.selectedMenuPosition = curState.list.length - 1;
+                    setState({
+                        ...curState,
+                        selectedMenuPosition: posUp
+                    });
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    console.log('[render]: MainMenu');
+    console.log('[render]: MainMenu ');
 
     return <div className="main-menu-container">
         <div className="title">
@@ -63,12 +71,16 @@ export const MainMenu: React.FC  = () => {
         </div>
         <div className="main-menu">
             <Inputs
-                onKeyDown={ () => {} }
-                onKeyUp={ () => {} }
-                onKeyPressed={ onKeyPressed }
+                allowSpecialKeys={ true }
+                setKeys={ ( keys: IKeyProps[] ) => {
+                    keys.map( item => {
+                        item.press = () => onKeyDown( item.code );
+                    });
+                } }
             >
                 <MenuList
-                    list={ menu }
+                    list={ state.list }
+                    selectedItem={ state.selectedMenuPosition }
                 />
             </Inputs>
         </div>

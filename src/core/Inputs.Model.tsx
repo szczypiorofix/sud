@@ -1,46 +1,28 @@
 
 export interface IInputsProps {
     children: JSX.Element;
-    onKeyDown: ( keyProps: IKeyProps ) => void;
-    onKeyUp: ( keyProps: IKeyProps ) => void;
-    onKeyPressed: ( keyProps: IKeyProps ) => void;
+    setKeys: (keys: IKeyProps[] ) => void;
+    allowSpecialKeys: boolean;
 }
 
-
-
-export const KEYS = [
-    'KeyW',
-    'KeyA',
-    'KeyS',
-    'KeyD',
-    'KeyQ',
-    'KeyO',
-    'KeyN',
-    'Space',
-];
+export enum KEY {
+    KEY_W = 'KeyW',
+    KEY_S = 'KeyS',
+    KEY_A = 'KeyA',
+    KEY_D = 'KeyD',
+    KEY_SPACE = 'Space',
+    KEY_UP = 'ArrowUp',
+    KEY_DOWN = 'ArrowDown',
+    KEY_LEFT = 'ArrowLeft',
+    KEY_RIGHT = 'ArrowRight'
+}
 
 export interface IKeyProps {
-    down: boolean;
-    up: boolean;
-    pressed: boolean;
-    code:  string;
+    code: KEY;
+    isDown: Boolean;
+    isUp: Boolean;
+    press: ()=> void;
+    release: ()=> void;
+    downHandler: ( event: KeyboardEvent ) => void;
+    upHandler: ( event: KeyboardEvent ) => void;
 }
-
-
-export interface IKeyPropsList {
-    [index: string]: IKeyProps;
-}
-
-
-let defaultKeys: IKeyPropsList = {};
-
-KEYS.map( ( item ) => {
-    defaultKeys[ item ] = {
-        code: item,
-        down: false,
-        pressed: false,
-        up: false
-    };
-});
-
-// export const DEFAULT_KEYS = defaultKeys;

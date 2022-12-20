@@ -11,7 +11,7 @@ export const MenuList: React.FC<IMenuListProps> = ( props: IMenuListProps ) => {
             .map( (item, index) => <MenuListItem
                 key={ index }
                 title={ item.title }
-                selected={ item.selected }
+                selected={ props.selectedItem === index }
             />)
         }
     </ul>

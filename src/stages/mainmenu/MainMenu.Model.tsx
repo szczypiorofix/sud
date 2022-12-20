@@ -1,11 +1,21 @@
 
 export interface IMainMenuItem {
     title: string;
-    selected: boolean;
 }
+
 
 export interface IMenuListProps {
     list: IMainMenuItem[];
+    selectedItem: number;
 }
 
 
+export interface IMainMenuState {
+    selectedMenuPosition: number;
+    list: IMainMenuItem[];
+}
+
+export interface IMenuListItemProps {
+    title: string;
+    selected: boolean;
+}
