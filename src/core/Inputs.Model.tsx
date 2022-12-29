@@ -14,7 +14,8 @@ export enum KEY {
     KEY_UP = 'ArrowUp',
     KEY_DOWN = 'ArrowDown',
     KEY_LEFT = 'ArrowLeft',
-    KEY_RIGHT = 'ArrowRight'
+    KEY_RIGHT = 'ArrowRight',
+    KEY_ENTER = 'Enter'
 }
 
 export interface IKeyProps {

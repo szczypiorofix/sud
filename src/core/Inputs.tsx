@@ -18,6 +18,7 @@ export const Inputs: React.FC<IInputsProps> = ( props: IInputsProps ) => {
         const keyA     = prepareKey( KEY.KEY_A );
 
         const keySpace = prepareKey( KEY.KEY_SPACE );
+        const keyEnter = prepareKey( KEY.KEY_ENTER );
 
         return [
             keyUp,
@@ -30,7 +31,8 @@ export const Inputs: React.FC<IInputsProps> = ( props: IInputsProps ) => {
             keyS,
             keyA,
 
-            keySpace
+            keySpace,
+            keyEnter
         ];
     }
 
